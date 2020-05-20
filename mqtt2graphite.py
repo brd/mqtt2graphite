@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 
 __author__ = "Jan-Piet Mens"
 __copyright__ = "Copyright (C) 2013 by Jan-Piet Mens"
@@ -109,10 +109,15 @@ def on_message(mosq, userdata, msg):
                 return
 
             message = '\n'.join(lines) + '\n'
-            logging.debug("%s", message)
+            logging.debug("msg: %s", message)
 
-            sock.sendto(message, (CARBON_SERVER, CARBON_PORT))
-  
+            try:
+              sock.sendto(bytes(message, 'utf-8'), (CARBON_SERVER, CARBON_PORT))
+            except Exception as e:
+              logging.info("error message: %s", str(e))
+              sys.exit()
+
+
 def on_subscribe(mosq, userdata, mid, granted_qos):
     pass
 
@@ -128,6 +133,7 @@ def main():
     logging.info("Starting %s" % client_id)
     logging.info("INFO MODE")
     logging.debug("DEBUG MODE")
+    logging.debug("Carbon Server: %s:%s", CARBON_SERVER, CARBON_PORT)
 
     map = {}
     if len(sys.argv) > 1:
