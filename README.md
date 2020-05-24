@@ -27,7 +27,7 @@ UDP_RECEIVER_PORT = 2003
 * Configure the mqtt2graphite init script
 
 ```bash
-pip install git+https://github.com/jpmens/mqtt2graphite.git
+pip install git+https://github.com/brd/mqtt2graphite.git
 ./init_server.sh mqtt.hostname
 ```
 
