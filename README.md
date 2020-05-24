@@ -14,6 +14,12 @@ numeric, these are then sent off to Carbon (see example below)
 
 * [Paho Python MQTT](https://pypi.python.org/pypi/paho-mqtt)
 * A running Carbon/Graphite server with UDP-enabled reception
+  * In carbon.conf uncomment and adjust the following lines as needed:
+```
+ENABLE_UDP_LISTENER = True
+UDP_RECEIVER_INTERFACE = 127.0.0.1
+UDP_RECEIVER_PORT = 2003
+```
 * Access to an MQTT broker. (I use [Mosquitto](http://mosquitto.org/))
 
 ## Installation and Configuration
